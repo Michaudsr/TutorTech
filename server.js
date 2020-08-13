@@ -5,6 +5,7 @@ const app = express();
 const session = require('express-session');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const passport = require('./config/ppConfig')
+const flash = require('connect-flash');
 // const db = require('../models');
 
 app.set('view engine', 'ejs');
@@ -13,6 +14,7 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+
 
 // secret: What we actually giving back to the user to use our site/ session cookie
 // resave: Save the session if even if it's modified, make this false
@@ -27,6 +29,9 @@ app.use(session({
 // Initialize passport and run session as middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// flash for temporary messages to the user
+app.use(flash());
 
 app.get('/', (req, res) => {
   res.render('index');
