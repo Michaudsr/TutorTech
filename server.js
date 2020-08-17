@@ -6,7 +6,8 @@ const session = require('express-session');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const passport = require('./config/ppConfig')
 const flash = require('connect-flash');
-// const db = require('../models');
+// require the authorization middleware at the top of the page
+const isLoggedIn = require('./middleware/isLoggedIn');
 
 app.set('view engine', 'ejs');
 
@@ -36,23 +37,23 @@ app.use(flash());
 // middleware to have our messages accessible for every view
 app.use((req, res, next) => {
   // before every route, we will attached our user to res.local
-  res.local.alerts = req.flash();
-  res.local.currentUser = req.user;
+  res.locals.alerts = req.flash();
+  res.locals.currentUser = req.user;
   next();
 });
 
 app.get('/', (req, res) => {
-  res.render('index', { alert: req.flash() });
+  res.render('index', { alerts: res.locals.alerts });
 });
-
-app.get('/profile', (req, res) => {
+                                              
+app.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile');
 });
 
 app.use('/auth', require('./routes/auth'));
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${port} 🎧`);
 });

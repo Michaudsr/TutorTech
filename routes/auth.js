@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models')
+const db = require('../models');
 const passport = require('../config/ppConfig');
-const { authenticate } = require('passport');
 
 router.get('/signup', (req, res) => {
   res.render('auth/signup');
@@ -12,11 +11,11 @@ router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
-router.post('/signup', (req, res) =>{
+router.post('/signup', (req, res) => {
   console.log(req.body);
   db.user.findOrCreate({
     where: { email: req.body.email },
-    defaults: {
+    defaults: { 
       name: req.body.name,
       password: req.body.password
     }
@@ -28,21 +27,21 @@ router.post('/signup', (req, res) =>{
       // FLASH MESSAGE
       passport.authenticate('local', {
         successRedirect: '/',
-        successFlash: 'Account created and logging in'
+        successFlash:'Account created and logging in'
       })(req, res);
       // before passport authenicate
-      // res.redirect('/')
+      // res.redirect('/');
     } else {
       // Email already exist
-      console.log('Email already exists');
-      // FLASH 
-      req.flash('Email already exists. Please try again.')
+      console.log('Email already exist');
+      // FLASH
+      req.flash('error','Email already exist. Please try again.');
       res.redirect('/auth/signup');
     }
   })
-  .catch(err => {
-    console.log('err');
-    req.flash(`Err, unfortunately...${error}`)
+  .catch(error => {
+    console.log('Error', error);
+    req.flash('error',`Error, unfortunately... ${error}`);
     res.redirect('/auth/signup');
   });
 });
@@ -51,18 +50,15 @@ router.post('/signup', (req, res) =>{
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
-  successFlash: 'Welcome back!',
+  successFlash: 'Welcome back.',
   failureFlash: 'Either email or password is incorrect. Please try again.'
 }));
 
 router.get('/logout', (req, res) => {
-  req.logout();
-  req.flash('See you soon, Logging out.');
+  req.logOut();
+  // FLASH MESSAGE
+  req.flash('success','See you soon. Logging out.');
   res.redirect('/');
-})
-
-// router.post('/login', (req, res) => {
-
-// })
+});
 
 module.exports = router;
