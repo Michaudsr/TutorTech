@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      
     }
   };
   student.init({
@@ -19,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     userId: DataTypes.INTEGER,
+    references: { model: 'users', key: 'id' },
+    onDelete: 'CASCADE',
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     description: DataTypes.TEXT
