@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      
+      // student.belongsTo(models.users, { 
+      //   foreignKey: 'userId', 
+      //   as: 'users' 
+      // });
     }
   };
   student.init({
@@ -20,9 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    // references: { model: 'user', key: 'id' },
-    // onDelete: 'CASCADE',
-
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     description: DataTypes.TEXT

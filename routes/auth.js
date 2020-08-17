@@ -13,17 +13,17 @@ router.get('/login', (req, res) => {
 
 router.post('/signup', (req, res) => {
   console.log(req.body);
-  db.user.findOrCreate({
-    where: { email: req.body.email },
+  db.users.findOrCreate({
+    where: { distinction: req.body.distinction },
     defaults: { 
       name: req.body.name,
       password: req.body.password
     }
   })
-  .then(([user, created]) => {
+  .then(([users, created]) => {
     if (created) {
       // if created, success and redirect to home
-      console.log(`${user.name} was created`);
+      console.log(`${users.name} was created`);
       // FLASH MESSAGE
       passport.authenticate('local', {
         successRedirect: '/',

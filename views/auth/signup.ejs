@@ -1,15 +1,15 @@
 <form action="/auth/signup" method="POST">
-  <label for="first-name">First name</label>
-  <input id="first-name" type="text" name="name">
+  <label for="firstName">First name</label>
+  <input id="firstName" type="text" name="firstName">
   
-  <label for="Last-name">Last name</label>
-  <input id="Last-name" type="text" name="name">
+  <label for="lastName">Last name</label>
+  <input id="lastName" type="text" name="lastName">
 
-  <label for="new-email">Email</label>
-  <input id="new-email" type="email" name="email">
+  <label for="email">Email</label>
+  <input id="email" type="email" name="email">
   
-  <label for="new-password">Password</label>
-  <input id="new-password" type="password" name="password">
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password">
 
   <label for="city">City</label>
   <input id="city" type="city" name="city">
@@ -19,6 +19,12 @@
 
   <label for="description">Description</label>
   <input id="description" type="description" name="description">
+
+  <label for="distinction">Distinction</label>
+  <button id='student' type='distinction' name='distinction'>Student</button>
+  <button id='tutor' type='distinction' name='distinction'>Tutor</button>
+  <input type="boolean" id='distinction' name='distinction'>
+
 
 
   <input type="submit" value="Sign up">
