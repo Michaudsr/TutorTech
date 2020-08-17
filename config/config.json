@@ -1,16 +1,16 @@
 {
   "development": {
-    "database": "authapp_development",
+    "database": "tutortech_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "database": "authapp_test",
+    "database": "tutortech_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "database": "authapp_production",
+    "database": "tutortech_production",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

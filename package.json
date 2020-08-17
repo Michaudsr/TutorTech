@@ -1,5 +1,5 @@
 {
-  "name": "authapp",
+  "name": "tutortech",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -25,5 +25,19 @@
     "passport-local": "^1.0.0",
     "pg": "^7.11.0",
     "sequelize": "^5.8.12"
-  }
+  },
+  "description": "Express authentication template using Passport + flash messages + custom middleware",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Michaudsr/TutorTech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/Michaudsr/TutorTech/issues"
+  },
+  "homepage": "https://github.com/Michaudsr/TutorTech#readme"
 }
