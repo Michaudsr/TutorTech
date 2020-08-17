@@ -13,21 +13,20 @@ router.get('/login', (req, res) => {
 
 router.post('/signup', (req, res) => {
   console.log(req.body);
-  db.users.findOrCreate({
-    where: { distinction: req.body.distinction },
+  db.user.findOrCreate({
+    where: { email: req.body.email },
     defaults: { 
-      name: req.body.name,
       password: req.body.password
     }
   })
-  .then(([users, created]) => {
+  .then(([user, created]) => {
     if (created) {
       // if created, success and redirect to home
-      console.log(`${users.name} was created`);
+      console.log(`${user.name} was created`);
       // FLASH MESSAGE
       passport.authenticate('local', {
         successRedirect: '/',
-        successFlash:'Account created and logging in'
+        successFlash: 'Account created and logging in'
       })(req, res);
       // before passport authenicate
       // res.redirect('/');
@@ -41,7 +40,7 @@ router.post('/signup', (req, res) => {
   })
   .catch(error => {
     console.log('Error', error);
-    req.flash('error',`Error, unfortunately... ${error}`);
+    req.flash('error', `Error, unfortunately... ${error}`);
     res.redirect('/auth/signup');
   });
 });

@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       length: {
-        type: Sequelize.TIME
+        type: Sequelize.INTEGER
       },
       virtual: {
         type: Sequelize.BOOLEAN

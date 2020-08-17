@@ -11,21 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // tutor.belongsTo(models.users, { 
-      //   foreignKey: 'userId', 
-      //   as: 'users' 
-      // });
+      tutor.belongsTo(models.user, { 
+        foreignKey: 'userId', 
+        as: 'user'
+      });
     }
   };
   tutor.init({
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    description: DataTypes.TEXT,
+    desription: DataTypes.TEXT,
     rating: DataTypes.INTEGER,
     hourlyRate: DataTypes.INTEGER
   }, {

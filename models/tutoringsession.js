@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     tutorId: DataTypes.INTEGER,
     time: DataTypes.TIME,
     date: DataTypes.DATE,
-    length: DataTypes.TIME,
+    length: DataTypes.INTEGER,
     virtual: DataTypes.BOOLEAN,
     category: DataTypes.STRING
   }, {

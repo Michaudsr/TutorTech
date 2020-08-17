@@ -14,16 +14,8 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING
-      },
       userId: {
-        type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
-        onDelete: 'CASCADE',
+        type: Sequelize.INTEGER
       },
       city: {
         type: Sequelize.STRING
@@ -31,7 +23,7 @@ module.exports = {
       state: {
         type: Sequelize.STRING
       },
-      description: {
+      desription: {
         type: Sequelize.TEXT
       },
       rating: {
