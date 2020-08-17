@@ -11,23 +11,32 @@ router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
   console.log(req.body);
   db.user.findOrCreate({
     where: { email: req.body.email },
     defaults: { 
-      password: req.body.password
+      password: req.body.password,
+      distinction: req.body.distinction
     }
   })
   .then(([user, created]) => {
     if (created) {
       // if created, success and redirect to home
-      console.log(`${user.name} was created`);
+      console.log(`${user.email} was created`);
+      if (req.body.distinction == 'student') {
+        // create student in student table
+        console.log('creating new student 😊')
+      } else {
+        // create tutor in tutor table
+        console.log('creating new tutor 😎')
+      }
+      
       // FLASH MESSAGE
       passport.authenticate('local', {
         successRedirect: '/',
         successFlash: 'Account created and logging in'
-      })(req, res);
+      })(req, res, next);
       // before passport authenicate
       // res.redirect('/');
     } else {
