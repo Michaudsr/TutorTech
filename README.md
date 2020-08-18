@@ -105,3 +105,65 @@ or
 ```
 node index.js
 ```
+## Tutor Tech
+Tutor Tech is an app that allows a user to sign up as either a student or a Tutor and create a personal profile. If a user signs up as a student they then will have the ability to search all the tutors in database, as well as search for a tutor by the location city and state. If a user signs up as a Tutor they have the ability to adjust their hourly rate and their profile will be visible for a user to search.
+
+## Sign Up
+
+The sign up logical first will find or create a user by their email,password and distinction(either student or tutor)
+```
+router.post('/signup', (req, res, next) => {
+  console.log(req.body);
+    db.user.findOrCreate({
+      where: { email: req.body.email },
+      defaults: { 
+        password: req.body.password,
+        distinction: req.body.distinction
+      }
+    })
+```
+Once the user has been created, and the distinction 'student' has been selected it will then create a student in the student table.
+```
+.then(([user, created]) => {
+      if (created) {
+        // if created, success and redirect to home
+        console.log(`${user.email} was created`);
+        if (req.body.distinction == 'student') {
+          // create student in student table
+          db.student.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userId: user.id,
+            city: req.body.city,
+            state: req.body.state,
+            description: req.body.description
+          })
+          .then((student) =>{
+            console.log('creating new student 😊', student.firstName)
+
+          }).catch(err => {
+            console.log('Error, Creating a new student 😢', err);
+          })
+```
+Else if tutor was selected it will create a tutor in the tutor table
+```
+ } else {
+          // create tutor in tutor table
+          db.tutor.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userId: user.id,
+            city: req.body.city,
+            state: req.body.state,
+            description: req.body.description,
+            hourlyRate: 150
+          })
+          .then((tutor) =>{
+            console.log('creating new tutor 😊', tutor.firstName)
+
+          }).catch(err => {
+            console.log('Error, Creating a new tutor 😢', err);
+          })
+        }
+```
+
