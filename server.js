@@ -8,6 +8,8 @@ const passport = require('./config/ppConfig')
 const flash = require('connect-flash');
 // require the authorization middleware at the top of the page
 const isLoggedIn = require('./middleware/isLoggedIn');
+const student = require('./models/student');
+const db = require('./models');
 
 app.set('view engine', 'ejs');
 
@@ -45,10 +47,50 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.render('index', { alerts: res.locals.alerts });
 });
-                                              
+                                             
 app.get('/profile', isLoggedIn, (req, res) => {
-  res.render('profile');
+  let userType = req.user.distinction 
+  if (userType == 'student') {
+    console.log(userType, '😀')
+    db.student.findOne({
+      where: { userId: req.user.id }
+    })
+    .then((student) =>{
+      res.render('profile', { student: student });
+
+    }).catch(err => {
+      console.log('Error, finding student at profile route 😢', err);
+    })
+  } else {
+      db.tutor.findOne({
+        where: { userId: req.user.id }
+      })
+      .then((tutor) =>{
+        res.render('tutorProfile', { tutor: tutor });
+  
+      }).catch(err => {
+        console.log('Error, finding tutor at profile route 😢', err);
+      })
+
+  }
 });
+
+
+app.get('/tutorSearch', (req, res) => {
+  db.tutor.findAll()
+  .then((tutors) =>{
+    console.log('tutors from search', tutors)
+    res.render('tutorSearch', { tutors: tutors })
+  }).catch(err => {
+    console.log('Error, finding tutors in tutorSearch route 🤮', err);
+  })
+
+})
+
+
+
+
+
 
 app.use('/auth', require('./routes/auth'));
 

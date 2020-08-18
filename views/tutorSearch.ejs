@@ -1,0 +1,19 @@
+<h1>List of All Tutors on the App</h1>
+
+<% tutors.forEach(t => { %>
+    <p>
+      <strong>
+        Name:
+        <%= t.firstName %>
+        <%= t.lastName %>
+        </strong>
+        City:
+        <%= t.city %>
+        State:
+        <%= t.state %>
+        Description:
+        <%= t.description %>
+        
+    </p>
+    
+  <% }) %>
