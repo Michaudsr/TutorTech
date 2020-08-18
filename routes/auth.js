@@ -26,10 +26,37 @@ router.post('/signup', (req, res, next) => {
         console.log(`${user.email} was created`);
         if (req.body.distinction == 'student') {
           // create student in student table
-          console.log('creating new student 😊')
+          db.student.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userId: user.id,
+            city: req.body.city,
+            state: req.body.state,
+            description: req.body.description
+          })
+          .then((student) =>{
+            console.log('creating new student 😊', student.firstName)
+
+          }).catch(err => {
+            console.log('Error, Creating a new student 😢', err);
+          })
         } else {
           // create tutor in tutor table
-          console.log('creating new tutor 😎')
+          db.tutor.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userId: user.id,
+            city: req.body.city,
+            state: req.body.state,
+            description: req.body.description,
+            hourlyRate: 150
+          })
+          .then((tutor) =>{
+            console.log('creating new tutor 😊', tutor.firstName)
+
+          }).catch(err => {
+            console.log('Error, Creating a new tutor 😢', err);
+          })
         }
         
         // FLASH MESSAGE

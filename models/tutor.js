@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      tutor.belongsTo(models.user, { 
-        foreignKey: 'userId', 
-        as: 'user'
-      });
+      models.tutor.belongsTo(models.user)
+      // this.myAssociation = models.tutor.belongsTo(models.user)
+      // models.tutor.belongsTo(models.user, { 
+      //   foreignKey: 'userId', 
+      //   as: 'user'
+      // });
     }
   };
   tutor.init({
@@ -23,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    desription: DataTypes.TEXT,
+    description: DataTypes.TEXT,
     rating: DataTypes.INTEGER,
     hourlyRate: DataTypes.INTEGER
   }, {

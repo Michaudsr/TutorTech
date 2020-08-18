@@ -12,16 +12,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      user.hasOne(models.student, { 
-        foreignKey: 'userId', 
-        as: 'student', 
-        onDelete: 'CASCADE' 
-      });
-      user.hasOne(models.tutor, { 
-        foreignKey: 'userId', 
-        as: 'tutor', 
-        onDelete: 'CASCADE' 
-      });
+      models.user.hasOne(models.student)
+      models.user.hasOne(models.tutor)
+      // this.myAssociation = models.user.hasOne(models.student)
+      // this.myAssociation = models.user.hasOne(models.tutor)
+      // models.user.hasOne(models.student, { 
+      //   foreignKey: 'userId', 
+      //   as: 'student', 
+      //   onDelete: 'CASCADE' 
+      // });
+      // models.user.hasOne(models.tutor, { 
+      //   foreignKey: 'userId', 
+      //   as: 'tutor', 
+      //   onDelete: 'CASCADE' 
+      // });
     }
   };
   user.init({
