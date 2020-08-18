@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      #map { position: absolute; top: 35%; bottom: 0; left: 53%; width: 35%; height: 55%;};
+  </style>
     <title>Tutor Tech</title>
     <link rel="stylesheet" href="/css/style.css">
   </head>
@@ -22,7 +25,10 @@
         </ul>
       </nav>
     </header>
-    <h1>Tutor Tech</h1>
-    <%- body %>
-  </body>
+      <h1>Tutor Tech</h1>
+      <h1>Maps</h1>
+      <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
+      <script src="to-title-case.js"></script>
+      <%- body %>
+    </body>
 </html>

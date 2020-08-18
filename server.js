@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const layouts = require('express-ejs-layouts');
+let methodOverride = require('method-override')
 const app = express();
 const session = require('express-session');
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -10,9 +11,12 @@ const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const student = require('./models/student');
 const db = require('./models');
+const mbxGeocoding= require('@mapbox/mapbox-sdk/services/geocoding')
+const geocodingClient = mbxGeocoding({accessToken: process.env.MAPBOX_TOKEN})
+
 
 app.set('view engine', 'ejs');
-
+app.use(methodOverride('_method'))
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
@@ -88,6 +92,25 @@ app.get('/tutorSearch', (req, res) => {
 })
 
 
+app.get('/locationSearch',(req,res)=>{
+  geocodingClient.forwardGeocode({
+      query: `${req.query.city},${req.query.state}`
+  })
+  .send()
+  .then(response=>{
+      let match = response.body.features[0]
+
+      console.log("match", match)
+      console.log(match.center)
+      res.render('locationSearch',{match, mapKey:process.env.MAPBOX_TOKEN, city:req.query.city, state:req.query.state})
+  })
+  .catch(err=>{
+      console.log(err)
+      res.send('Error',err)
+  })
+
+})
+
 
 
 
@@ -99,5 +122,7 @@ const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${port} 🎧`);
 });
+
+
 
 module.exports = server;

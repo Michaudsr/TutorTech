@@ -4,7 +4,10 @@ nav ul li {
   margin-right: .3em;
 }
 
-h1 {
-  color: darkred;
+.container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  
 }
 
