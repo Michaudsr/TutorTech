@@ -4,10 +4,10 @@ nav ul li {
   margin-right: .3em;
 }
 
-.container {
-  display: flex;
+body {
+  display: grid;
   justify-content: center;
   text-align: center;
-  
+  background-color: grey;
 }
 

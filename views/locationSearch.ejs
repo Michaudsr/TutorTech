@@ -1,6 +1,6 @@
 <h1>Tutors by Location</h1>
 
-<div>   <a href="/">Back to Search</a>   </div>
+<div>   <a href="/profile">Back to Search</a>   </div>
   
 <div id="map">
  <script>
@@ -13,32 +13,7 @@
          center: [<%= match.center[0] %>, <%= match.center[1] %>],
          zoom: 12
      })
-     let geojson = {
-         type: 'FeatureCollection',
-         features: [{
-             type: 'Feature',
-             geometry: {
-                 type: 'Point',
-                 coordinates: [<%= match.center[0] %>, <%= match.center[1] %>]
-             },
-             properties: {
-                 title: 'Mapbox',
-                 description: '<%= match.place_name %>'
-             }
-         },
-         {
-             type: 'Feature',
-             geometry: {
-                 type: 'Point',
-                 coordinates: [-122.2228, 37.1716]
-             },
-             properties: {
-                 title: 'Mapbox',
-                 description: 'Dope vacation spot'
-             }
-         }
-     ]
-     }
+     
      geojson.features.forEach((marker)=> {
          let el = document.createElement('div')
          el.className = 'marker'

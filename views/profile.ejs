@@ -5,7 +5,9 @@
 
 <form  method="GET" action="/locationSearch">
     City: <input type="text" name="city" id="" placeholder="city">
-   State: <input type="text" name="state" id="" placeholder="state">
+    State: <input type="text" name="state" id="" placeholder="state">
+    <input type="hidden" name='tutorId' value="<%= tutor.id %>">
+
     <button type="submit">Submit </button>
 </form>
 
