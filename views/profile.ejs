@@ -6,7 +6,7 @@
 <form  method="GET" action="/locationSearch">
     City: <input type="text" name="city" id="" placeholder="city">
     State: <input type="text" name="state" id="" placeholder="state">
-    <input type="hidden" name='tutorId' value="<%= tutor.id %>">
+    
 
     <button type="submit">Submit </button>
 </form>
@@ -14,7 +14,7 @@
     
  <p>First name: <%= student.firstName %>
  Last name: <%= student.lastName %>
- Email: <%=  %>
+ Email: <%= student.user.email %>
  City: <%= student.city %>
  State: <%= student.state %>
  Description: <%= student.description %>       

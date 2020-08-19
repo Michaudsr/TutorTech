@@ -11,9 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // models.tutoringSession.belongsToMany(models.tutor, { through: 'tutorId'})
-      // models.tutoringSession.belongsToMany(models.student, {through: 'studentId'})
-   
     }
   };
   tutoringSession.init({

@@ -58,8 +58,7 @@ app.get('/profile', isLoggedIn, (req, res) => {
     console.log(userType, '😀')
     db.student.findOne({
       where: { userId: req.user.id },
-      
-      
+      include: [db.user]
     })
     .then((student) =>{
       res.render('profile', { student: student});
@@ -83,6 +82,13 @@ app.get('/profile', isLoggedIn, (req, res) => {
   }
 });
 
+// app.put('tutorProfile', isLoggedIn, (req, res) =>{
+//   db.tutor.
+// })
+
+
+
+
 
 app.get('/tutorSearch', (req, res) => {
   db.tutor.findAll({ include: [db.user]})
@@ -98,26 +104,29 @@ app.get('/tutorSearch', (req, res) => {
 
 
 app.get('/locationSearch',(req,res)=>{
-  geocodingClient.forwardGeocode({
-      query: `${req.query.city},${req.query.state}`
-      
-      
+  db.tutor.findAll({
+    where: { city: req.query.city}
   })
-  .send()
-  .then(response=>{
-      let match = response.body.features[0]
-
-      console.log("match", match)
-      console.log(match.center)
-      res.render('locationSearch',{match, mapKey:process.env.MAPBOX_TOKEN, city:req.query.city, state:req.query.state})
-  })
-  .catch(err=>{
-      console.log(err)
-      res.send('Error',err)
+  .then(tutors =>{
+    geocodingClient.forwardGeocode({
+      query: `${req.query.city},${req.query.state}`,  
+    })
+    .send()
+    .then(response=>{
+        let match = response.body.features[0]
+  
+        console.log("match", match)
+        console.log(match.center)
+        res.render('locationSearch',{match, mapKey:process.env.MAPBOX_TOKEN, city:req.query.city, state:req.query.state, tutors: tutors})
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send('Error',err)
+    })
+    console.log(tutors)
   })
 
 })
-
 
 
 

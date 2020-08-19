@@ -23,7 +23,7 @@ module.exports = {
       state: {
         type: Sequelize.STRING
       },
-      desription: {
+      description: {
         type: Sequelize.TEXT
       },
       createdAt: {

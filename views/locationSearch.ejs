@@ -1,7 +1,34 @@
 <h1>Tutors by Location</h1>
 
 <div>   <a href="/profile">Back to Search</a>   </div>
+
+<% tutors.forEach(t => { %>
+    <p>
+      <strong>
+              Name:
+              <%= t.firstName %>
+              <%= t.lastName %>
+        </strong>
+        Email:
+        <%= t.user %>
+        City:
+        <%= t.city %>
+        State:
+        <%= t.state %>
+        Description:
+        <%= t.description %>
+        Rating:
+        <%= t.rating %>
+        Hourly Rate:
+        <%= t.hourlyRate %>
+
+
+    </p>
+    
+  <% }) %>
   
+
+
 <div id="map">
  <script>
      // let lat = document.getElementById('lat').textContent

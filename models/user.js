@@ -12,9 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // models.user.hasOne(models.student)
-      // models.user.hasOne(models.tutor)
-     
+      models.user.hasOne(models.student)
+      models.user.hasOne(models.tutor)
     }
   };
   user.init({
