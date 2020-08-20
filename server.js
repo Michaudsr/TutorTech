@@ -82,11 +82,49 @@ app.get('/profile', isLoggedIn, (req, res) => {
   }
 });
 
-// app.put('tutorProfile', isLoggedIn, (req, res) =>{
-//   db.tutor.
-// })
+app.get('/tutorProfileEdit', isLoggedIn, (req, res) =>{
+  db.tutor.findOne({
+    where: { userId: req.user.id },
+    include: [db.user]
 
+  })
+  .then((tutor) =>{
+    res.render('tutorProfileEdit', { tutor: tutor });
 
+  }).catch(err => {
+    console.log('Error, finding tutor at profile route 😢', err);
+  })
+})
+
+app.put('/tutorProfileEdit', isLoggedIn, (req, res) =>{
+  db.tutor.update(req.body, {
+    where: { userId: req.user.id },
+    include: [db.user]
+  })
+    .then(([row, tutor]) =>{
+      res.redirect('/profile')
+    }).catch(err => {
+      console.log('Error updating tutor at tutorProfileEdit put route', err);
+    })
+})
+
+app.delete('/tutorDelete', isLoggedIn, (req, res) =>{
+  db.tutor.destroy({
+    where: { userId: req.user.id },
+    include: [db.user]
+  })
+  .then((tutor) =>{
+    db.user.destroy({
+      where: { id: req.user.id }
+    }).then((user) =>{
+      res.redirect('/auth/signup')
+    }).catch(err => {
+      console.log('Error Deleting User', err);
+    })
+  }).catch(err => {
+    console.log('Error Deleting Tutor', err);
+  })
+})
 
 
 

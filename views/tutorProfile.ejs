@@ -3,6 +3,7 @@
 <h3>Welcome to your PROFILE</h3>
 
 
+
 <p> First name: <%= tutor.firstName %>
     Last name: <%= tutor.lastName %>
     Email: <%= tutor.user.email%>
@@ -11,3 +12,10 @@
     Description: <%= tutor.description %>
     Hourly Rate: <%= tutor.hourlyRate %>       
 </p>
+<form action="/tutorProfileEdit" method="GET">
+<button>Edit</button>
+</form>
+
+<form action="/tutorDelete?_method=DELETE" method="POST">
+    <button>Delete</button>
+ </form>

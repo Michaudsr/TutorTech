@@ -1,0 +1,21 @@
+<form action="/tutorProfileEdit?_method=PUT" method="POST">
+    <label for="firstName">First name</label>
+    <input id="firstName" type="text" name="firstName" value="<%= tutor.firstName %>">
+    
+    <label for="lastName">Last name</label>
+    <input id="lastName" type="text" name="lastName" value="<%= tutor.lastName %>">
+  
+    <label for="city">City</label>
+    <input id="city" type="city" name="city" value="<%= tutor.city %>">
+  
+    <label for="state">State</label>
+    <input id="state" type="state" name="state" value="<%= tutor.state %>">
+  
+    <label for="description">Description</label>
+    <input id="description" type="description" name="description" value="<%= tutor.description %>">
+
+    <label for="hourlyRate">Hourly Rate</label>
+    <input id="hourlyRate" type="hourlyRate" name="hourlyRate" value="<%= tutor.hourlyRate %>">
+
+    <button type='submit'>Update</button>
+</form>
