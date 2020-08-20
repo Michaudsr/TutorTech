@@ -82,6 +82,78 @@ app.get('/profile', isLoggedIn, (req, res) => {
   }
 });
 
+app.get('/tutorProfile/:id', (req, res) =>{
+  db.tutor.findOne({
+    where: { userId: req.params.id },
+    include: [db.user]
+
+  })
+  .then((tutor) =>{
+    res.render('tutorProfile', { tutor: tutor });
+
+  }).catch(err => {
+    console.log('Error, finding tutor at profile route 😢', err);
+  })
+  })
+  
+
+
+app.get('/locationSearch',(req,res)=>{
+  db.tutor.findAll({
+    where: { city: req.query.city}
+  })
+  .then(tutors =>{
+    geocodingClient.forwardGeocode({
+      query: `${req.query.city},${req.query.state}`,  
+    })
+    .send()
+    .then(response=>{
+        let match = response.body.features[0]
+  
+        console.log("match", match)
+        console.log(match.center)
+        res.render('locationSearch',{match, mapKey:process.env.MAPBOX_TOKEN, city:req.query.city, state:req.query.state, tutors: tutors})
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send('Error',err)
+    })
+    console.log(tutors)
+  })
+
+})
+
+app.get('/tutorSearch', (req, res) => {
+  db.tutor.findAll({ include: [db.user]})
+  .then((tutors) =>{
+    console.log('tutors from search', tutors)
+    console.log(tutors[0].user, '😶' )
+    res.render('tutorSearch', { tutors: tutors })
+  }).catch(err => {
+    console.log('Error, finding tutors in tutorSearch route 🤮', err);
+  })
+
+})
+
+app.delete('/studentDelete', isLoggedIn, (req, res) =>{
+  db.student.destroy({
+    where: { userId: req.user.id },
+    include: [db.user]
+  })
+  .then((student) =>{
+    db.user.destroy({
+      where: { id: req.user.id }
+    }).then((user) =>{
+      res.redirect('/auth/signup')
+    }).catch(err => {
+      console.log('Error Deleting User', err);
+    })
+  }).catch(err => {
+    console.log('Error Deleting Tutor', err);
+  })
+})
+/*********************************************************************************************************************/
+// Tutor routes
 app.get('/tutorProfileEdit', isLoggedIn, (req, res) =>{
   db.tutor.findOne({
     where: { userId: req.user.id },
@@ -128,43 +200,9 @@ app.delete('/tutorDelete', isLoggedIn, (req, res) =>{
 
 
 
-app.get('/tutorSearch', (req, res) => {
-  db.tutor.findAll({ include: [db.user]})
-  .then((tutors) =>{
-    console.log('tutors from search', tutors)
-    console.log(tutors[0].user, '😶' )
-    res.render('tutorSearch', { tutors: tutors })
-  }).catch(err => {
-    console.log('Error, finding tutors in tutorSearch route 🤮', err);
-  })
-
-})
 
 
-app.get('/locationSearch',(req,res)=>{
-  db.tutor.findAll({
-    where: { city: req.query.city}
-  })
-  .then(tutors =>{
-    geocodingClient.forwardGeocode({
-      query: `${req.query.city},${req.query.state}`,  
-    })
-    .send()
-    .then(response=>{
-        let match = response.body.features[0]
-  
-        console.log("match", match)
-        console.log(match.center)
-        res.render('locationSearch',{match, mapKey:process.env.MAPBOX_TOKEN, city:req.query.city, state:req.query.state, tutors: tutors})
-    })
-    .catch(err=>{
-        console.log(err)
-        res.send('Error',err)
-    })
-    console.log(tutors)
-  })
 
-})
 
 
 

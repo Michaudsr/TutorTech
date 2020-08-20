@@ -4,30 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-      #map { position: absolute; top: 35%; bottom: 0; left: 53%; width: 35%; height: 55%;};
+      #map { position: absolute; top: 45%; bottom: 0; left: 53%; width: 25%; height: 35%;};
   </style>
     <title>Tutor Tech</title>
-    <link rel="stylesheet" href="/css/style.css">
+    
   </head>
+  <!-- materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <body>
-    <% include partials/alerts %>
-    <header>
-      <nav>
-        <ul>
-          <% if (!currentUser) { %>
-            <li><a id="signup" href="/auth/signup">Signup</a></li>
-            <li><a href="/auth/login">Login</a></li>
-         <% } else { %>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/tutorSearch">See Experts</a></li>
-          <li><a href="/auth/logout">Logout</a></li>
-        <% } %>
-        </ul>
-      </nav>
-    </header>
-      <h1>Tutor Tech</h1>
+      <% include partials/alerts %>
+      <header>
+        <nav>
+          <ul>
+            <% if (!currentUser) { %>
+              <li><a id="signup" href="/auth/signup">Signup</a></li>
+              <li><a href="/auth/login">Login</a></li>
+              <% } else { %>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/tutorSearch">See Experts</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+                <% } %>
+              </ul>
+            </nav>
+          </header>
+          <div id='container'>
+          <h1>Tutor Tech</h1>
+        </div>
       <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
       <script src="to-title-case.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <link rel="stylesheet" href="../css/style.css">
       <%- body %>
     </body>
 </html>

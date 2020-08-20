@@ -13,20 +13,4 @@ body {
   
 }
 
-#login {
-  display: grid;
-  justify-content: center;
-  text-align: center;
-  margin: 0 auto;
-  width: auto;
-  height: 600px;
-  
-  
-}
 
-footer {
-  height: 200px;
-  width: auto;
-  
-
-}

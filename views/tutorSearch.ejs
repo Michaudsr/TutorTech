@@ -3,9 +3,11 @@
 <% tutors.forEach(t => { %>
     <p>
       <strong>
-              Name:
-              <%= t.firstName %>
-              <%= t.lastName %>
+          <a href= <%=`/tutorProfile/${t.id}`%>>
+            Name:
+            <%= t.firstName %>
+            <%= t.lastName %>
+        </a>
         </strong>
         Email:
         <%= t.user.email %>
