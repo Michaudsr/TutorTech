@@ -13,6 +13,6 @@
     "database": "tutor_production",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "use_env_variable": "postgres://mvaqytdnrkjmkx:86ae70319335cb4384f565c046ad40178d8ca6827696381a5ac53c1fb29e15f1@ec2-52-22-94-132.compute-1.amazonaws.com:5432/ddqr4jrb1379bg"
+    "use_env_variable": "DATABASE_URL"
   }
 }
