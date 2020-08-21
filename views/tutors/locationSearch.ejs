@@ -4,23 +4,27 @@
 
 <% tutors.forEach(t => { %>
     <p>
-      <strong>
-              Name:
-              <%= t.firstName %>
-              <%= t.lastName %>
-        </strong>
-        Email:
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <%= t.firstName %>
+        <%= t.lastName %>
+    </div>      
+    <div class="pure-u-1 pure-u-md-1-3"> 
         <%= t.user %>
-        City:
-        <%= t.city %>
-        State:
+    </div>
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <%= t.city %>,
         <%= t.state %>
-        Description:
+    </div>   
+    <div class="pure-u-1 pure-u-md-1-3"> 
         <%= t.description %>
-        Rating:
+    </div>  
+    <div class="pure-u-1 pure-u-md-1-3"> 
         <%= t.rating %>
-        Hourly Rate:
+    </div>
+    <div class="pure-u-1 pure-u-md-1-3"> 
         <%= t.hourlyRate %>
+    </div>    
+        
 
 
     </p>

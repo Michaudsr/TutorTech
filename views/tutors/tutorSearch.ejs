@@ -1,29 +1,29 @@
-<h1>List of All Tutors on the App</h1>
-
-<% tutors.forEach(t => { %>
-    <p>
-           <form method="GET" action="/tutor/profile/<%= t.id %>"> 
+<div class="pure-u-1 pure-u-md-1-3"> 
+  <h1>List of All Tutors on the App</h1>
+  <% tutors.forEach(t => { %>
+      <p>
+        <div class="pure-u-1 pure-u-md-1-3"> 
+          <form method="GET" action="/tutor/profile/<%= t.id %>"> 
             <input type="hidden" name="id" value="<%= t.id %>">
-            Name:
             <button type='submit'>
             <%= t.firstName %>
             <%= t.lastName %>
           </button>
           </form>
-        Email:
-        <%= t.user.email %>
-        City:
-        <%= t.city %>
-        State:
-        <%= t.state %>
-        Description:
-        <%= t.description %>
-        Rating:
-        <%= t.rating %>
-        Hourly Rate:
-        <%= t.hourlyRate %>
-
-
-    </p>
-    
-  <% }) %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3"> 
+          <%= t.user.email %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3"> 
+          <%= t.city %>,
+          <%= t.state %>
+        </div>
+        
+        
+         
+  
+  
+      </p>
+      
+    <% }) %>
+</div>

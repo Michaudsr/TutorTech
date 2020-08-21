@@ -1,21 +1,32 @@
 <form action="/tutor/tutorProfileEdit?_method=PUT" method="POST">
-    <label for="firstName">First name</label>
-    <input id="firstName" type="text" name="firstName" value="<%= tutor.firstName %>">
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <label for="firstName"></label>
+        <input id="firstName" type="text" name="firstName" placeholder="first name" value="<%= tutor.firstName %>">
+    </div>
+
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <label for="lastName"></label>
+        <input id="lastName" type="text" name="lastName" placeholder="last name" value="<%= tutor.lastName %>">
+    </div>
     
-    <label for="lastName">Last name</label>
-    <input id="lastName" type="text" name="lastName" value="<%= tutor.lastName %>">
-  
-    <label for="city">City</label>
-    <input id="city" type="city" name="city" value="<%= tutor.city %>">
-  
-    <label for="state">State</label>
-    <input id="state" type="state" name="state" value="<%= tutor.state %>">
-  
-    <label for="description">Description</label>
-    <input id="description" type="description" name="description" value="<%= tutor.description %>">
-
-    <label for="hourlyRate">Hourly Rate</label>
-    <input id="hourlyRate" type="hourlyRate" name="hourlyRate" value="<%= tutor.hourlyRate %>">
-
-    <button type='submit'>Update</button>
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <label for="city"></label>
+        <input id="city" type="city" name="city" placeholder="city" value="<%= tutor.city %>">
+    </div>
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <label for="state"></label>
+        <input id="state" type="state" name="state" placeholder="state" value="<%= tutor.state %>">
+    </div>
+    
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <label for="description"></label>
+        <input id="description" type="description" name="description" placeholder='description' value="<%= tutor.description %>">
+    </div>
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <label for="hourlyRate"></label>
+        <input id="hourlyRate" type="hourlyRate" name="hourlyRate" placeholder="hourly rate" value="<%= tutor.hourlyRate %>">
+    </div>
+    <div class="pure-u-1 pure-u-md-1-3"> 
+        <button type='submit'>Update</button>
+    </div>
 </form>

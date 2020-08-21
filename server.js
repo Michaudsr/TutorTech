@@ -46,6 +46,8 @@ app.get('/', (req, res) => {
   res.render('index', { alerts: res.locals.alerts });
 });
 
+
+
 app.use('/auth', require('./routes/auth'));
 app.use('/tutor', require('./routes/tutor'))
 app.use('/student', require('./routes/student'))
