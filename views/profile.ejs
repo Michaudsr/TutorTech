@@ -3,24 +3,39 @@
 <h3>Welcome to your PROFILE</h3>
 
 
-<form  method="GET" action="/locationSearch">
-    City: <input type="text" name="city" id="" placeholder="city">
-    State: <input type="text" name="state" id="" placeholder="state">
+
+<% if (userType == 'student') { %>
+    <form  method="GET" action="/tutor/locationSearch">
+        City: <input type="text" name="city" id="" placeholder="city">
+        State: <input type="text" name="state" id="" placeholder="state">
+        
     
-
-    <button type="submit">Submit </button>
-</form>
-
+        <button type="submit">Submit </button>
+    </form>
+    <p>
+    First name: <%= student.firstName %>
+    Last name: <%= student.lastName %>
+    Email: <%= currentUser.email %>
+    City: <%= student.city %>
+    State: <%= student.state %>
+    Description: <%= student.description %>       
+    </p>
+<% } else { %>
+    <p> First name: <%= tutor.firstName %>
+        Last name: <%= tutor.lastName %>
+        Email: <%= currentUser.email%>
+        City: <%= tutor.city %>
+        State: <%= tutor.state %>
+        Description: <%= tutor.description %>
+        Hourly Rate: <%= tutor.hourlyRate %>       
+    </p>
+    <form action="/tutor/tutorProfileEdit" method="GET">
+    <button>Edit</button>
+    </form>
     
- <p>First name: <%= student.firstName %>
- Last name: <%= student.lastName %>
- Email: <%= student.user.email %>
- City: <%= student.city %>
- State: <%= student.state %>
- Description: <%= student.description %>       
- </p>
-
-
-
+    <form action="/tutor/tutorDelete?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+<% } %>
 
 

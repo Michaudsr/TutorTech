@@ -2,13 +2,14 @@
 
 <% tutors.forEach(t => { %>
     <p>
-      <strong>
-          <a href= <%=`/tutorProfile/${t.id}`%>>
+           <form method="GET" action="/tutor/profile/<%= t.id %>"> 
+            <input type="hidden" name="id" value="<%= t.id %>">
             Name:
+            <button type='submit'>
             <%= t.firstName %>
             <%= t.lastName %>
-        </a>
-        </strong>
+          </button>
+          </form>
         Email:
         <%= t.user.email %>
         City:

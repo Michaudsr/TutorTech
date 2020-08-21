@@ -8,9 +8,16 @@ body {
   display: grid inline ;
   justify-content: center;
   text-align: center;
-  background-color: grey;
+  background-color: #e0e0e0 ;
   
   
 }
 
+nav {
+  background-color:#90a4ae ;
+  height: auto;
+}
 
+.pure-u-1 {
+  margin: 10px;
+}
