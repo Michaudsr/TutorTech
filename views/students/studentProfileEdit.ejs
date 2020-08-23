@@ -1,4 +1,10 @@
 <form action="/student/studentProfileEdit?_method=PUT" method="POST">
+    
+    <form enctype="multipart/form-data" action="/" method="POST">
+        <input type="file" name="myFile">
+        <input type="submit" class="btn btn-primary">
+    </form>
+    
     <div class="pure-u-1 pure-u-md-1-3"> 
         <label for="firstName"></label>
         <input id="firstName" type="text" name="firstName" placeholder="first name" value="<%= student.firstName %>">
@@ -25,4 +31,5 @@
     <div class="pure-u-1 pure-u-md-1-3"> 
         <button type='submit'>Update</button>
     </div>
+  
 </form>

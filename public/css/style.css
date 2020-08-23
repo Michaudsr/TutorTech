@@ -35,6 +35,10 @@ button {
   
 }
 
+#description {
+  
+}
+
 .rating { font-size: 4em; }
 .rating input {
   display: none;

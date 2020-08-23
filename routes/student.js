@@ -3,6 +3,7 @@ let db = require('../models')
 const isLoggedIn = require('../middleware/isLoggedIn')
 const multer = require('multer');
 const upload = multer({dest: __dirname + '/profile'});
+const cloudinary = require('cloudinary')
 
 
 
@@ -27,13 +28,13 @@ router.get('/', isLoggedIn, (req, res) => {
   
         })
         .then((tutor) =>{
+          console.log(tutor.get())
           res.render('profile', { tutor: tutor, userType, currentUser: req.user });
     
         }).catch(err => {
           console.log('Error, finding tutor at profile route 😢', err);
         })
-  
-    }
+      }
   });
 
   router.get('/studentProfileEdit', isLoggedIn, (req, res) =>{
@@ -80,17 +81,28 @@ router.get('/', isLoggedIn, (req, res) => {
     })
   })
 
-  router.post('/', upload.single('photo'), (req, res) => {
-    if(req.file) {
-        res.json(req.file);
-    }
-    else throw 'error';
-  });
-
-  router.post('/', upload.single('avatar'), function (req, res, next) {
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
-
+ router.post('/', upload.single('myFile'), (req, res) => {
+    cloudinary.uploader.upload(req.file.path, (result) => {
+      db.cloudpic.findOrCreate({
+        where: { url: result.url }
+      })
+      .then(()=> {
+        res.redirect('/')
+      })
+      .catch(err => {
+        console.log('ERROR', err)
+      })
+    })
+  })
+  
+  router.get('/profile', (req, res) =>{
+    db.cloudpic.findAll()
+    .then(myPics => {
+      res.render('profile', { myPics })
+    })
+    .catch(err =>{
+      console.log('ERROR', err)
+    })
   })
 
 

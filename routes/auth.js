@@ -53,6 +53,7 @@ router.post('/signup', (req, res, next) => {
           })
           .then((tutor) =>{
             console.log('creating new tutor 😊', tutor.firstName)
+            console.log(tutor.description)
 
           }).catch(err => {
             console.log('Error, Creating a new tutor 😢', err);
