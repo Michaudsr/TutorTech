@@ -105,7 +105,7 @@ or
 ```
 node index.js
 ```
-## Tutor Tech
+# Tutor Tech
 Tutor Tech is an app that allows a user to sign up as either a student or a Tutor and create a personal profile. If a user signs up as a student they then will have the ability to search all the tutors in database, as well as search for a tutor by the location city and state. If a user signs up as a Tutor they have the ability to adjust their hourly rate and their profile will be visible for a user to search.
 
 ## Sign Up
@@ -166,4 +166,49 @@ Else if tutor was selected it will create a tutor in the tutor table
           })
         }
 ```
+## Login
 
+Once a user creates an account they can then log in as whichever distinction they chose, either a student or a tutor. The login using authenticate will either have a successful redirect back to the homepage or a failure back to the login, both using flash messages.
+```
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/auth/login',
+  successFlash: 'Welcome back.',
+  failureFlash: 'Either email or password is incorrect. Please try again.'
+}));
+```
+The login ejs page uses a form with an input for email and password.
+```
+<div class="pure-u-1 pure-u-md-1-3">
+  <form action="/auth/login" method="POST">
+    <label for="auth-email"></label>
+    <input id="auth-email" type="email" name="email" placeholder="email">
+</div>
+  <div class="pure-u-1 pure-u-md-1-3">
+    <label for="auth-password"></label>
+    <input id="auth-password" type="password" name="password" placeholder='password'>
+  </div>
+  <div class="pure-u-1 pure-u-md-1-3">
+    <button>Login</button>
+  </form>
+  </div>
+  ```
+Once logged in a user uses isLoggedIn middleware and and is able to access the site through a session cookie
+```
+module.exports = (req, res, next) => {
+    if (!req.user) {
+       req.flash('Error', 'You must be signed in to access this page');
+       res.redirect('/auth/login');
+
+    } else {
+        next();
+    }
+};
+```
+```
+app.use(session({
+  secret: SECRET_SESSION,
+  resave: false,
+  saveUninitialized: true
+}));
+```
