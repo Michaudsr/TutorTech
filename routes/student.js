@@ -81,6 +81,8 @@ router.get('/', isLoggedIn, (req, res) => {
     })
   })
 
+
+
 //  router.post('/', upload.single('myFile'), (req, res) => {
 //     cloudinary.uploader.upload(req.file.path, (result) => {
 //       db.student.update({

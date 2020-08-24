@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
 
 
 
+
 app.use('/auth', require('./routes/auth'));
 app.use('/tutor', require('./routes/tutor'))
 app.use('/student', require('./routes/student'))
@@ -56,5 +57,9 @@ const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${port} 🎧`);
 });
+
+app.get('*', (req, res) => {
+  res.render('error')
+})
 
 module.exports = server;
