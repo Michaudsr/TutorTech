@@ -4,6 +4,7 @@ nav ul li {
   text-decoration: none;
   display: inline-block;
   margin-right: .3em;
+  height: 50px;
 }
 
 body {
@@ -13,6 +14,7 @@ body {
   background-color: #e0e0e0 ;
   font-family:  'Lato', sans-serif;
   color: black;
+  
   
   
 }
@@ -41,3 +43,19 @@ img {
 }
 
 
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #e57373;
+  color: white;
+  text-align: center;
+  height: 100px;
+}
+
+h3 {
+  margin: 200px;
+  color: white;
+}
