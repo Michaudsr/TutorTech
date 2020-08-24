@@ -5,7 +5,6 @@ const mbxGeocoding= require('@mapbox/mapbox-sdk/services/geocoding')
 const geocodingClient = mbxGeocoding({accessToken: process.env.MAPBOX_TOKEN})
 
 
-
 router.get('/profile/:id', (req, res) =>{
     console.log(req.params)
     console.log('🤢')

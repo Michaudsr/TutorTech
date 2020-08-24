@@ -1,24 +1,18 @@
 <h2>Profile Page</h2>
 <h3>Welcome to your PROFILE</h3>
 
-
 <% if (userType == 'student') { %>
-<div class="pure-u-1 pure-u-md-1-3">
-
-</div>
-        
 <form  method="GET" action="/tutor/locationSearch">
     <div class="pure-u-1 pure-u-md-1-3"> 
-        <input type="text" name="city" id="" placeholder="city">
+    <input type="text" name="city" id="" placeholder="city">
     </div>
     <div class="pure-u-1 pure-u-md-1-3"> 
-        <input type="text" name="state" id="" placeholder="state">
+    <input type="text" name="state" id="" placeholder="state">
     </div>
     <div class="pure-u-1 pure-u-md-1-3"> 
-        <button type="submit">Submit </button>
+    <button type="submit">Submit </button>
     </div>
 </form>
-</div>
 <div class="pure-u-1 pure-u-md-1-3"> 
 <p>
 <div class="pure-u-1 pure-u-md-1-3"> 
@@ -59,16 +53,14 @@ Bio: <%= student.description %>
         <%= currentUser.email%>
         </div>
         <div class="pure-u-1 pure-u-md-1-3"> 
-        <%= tutor.city %>
-        </div>
-        <div class="pure-u-1 pure-u-md-1-3"> 
+        <%= tutor.city %>,
         <%= tutor.state %>
         </div>
         <div class="pure-u-1 pure-u-md-1-3"> 
          Bio: <%= tutor.description %>
         </div>
         <div class="pure-u-1 pure-u-md-1-3"> 
-        Hourly Rate: <%= tutor.hourlyRate %>       
+        Hourly Rate:$ <%= tutor.hourlyRate %>       
         </div>
         <div class="pure-u-1 pure-u-md-1-3"> 
         <form action="/tutor/tutorProfileEdit" method="GET">

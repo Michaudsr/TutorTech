@@ -2,7 +2,7 @@ let router = require('express').Router();
 let db = require('../models')
 const isLoggedIn = require('../middleware/isLoggedIn')
 const multer = require('multer');
-const upload = multer({dest: __dirname + '/profile'});
+const upload = multer({dest: './uploads'});
 const cloudinary = require('cloudinary')
 
 
@@ -35,7 +35,7 @@ router.get('/', isLoggedIn, (req, res) => {
           console.log('Error, finding tutor at profile route 😢', err);
         })
       }
-  });
+});
 
   router.get('/studentProfileEdit', isLoggedIn, (req, res) =>{
     db.student.findOne({
@@ -57,7 +57,7 @@ router.get('/', isLoggedIn, (req, res) => {
       include: [db.user]
     })
       .then(([row, student]) =>{
-        res.redirect('/student')
+        res.redirect('student')
       }).catch(err => {
         console.log('Error updating student at studentProfileEdit put route', err);
       })
@@ -81,29 +81,50 @@ router.get('/', isLoggedIn, (req, res) => {
     })
   })
 
- router.post('/', upload.single('myFile'), (req, res) => {
-    cloudinary.uploader.upload(req.file.path, (result) => {
-      db.cloudpic.findOrCreate({
-        where: { url: result.url }
-      })
-      .then(()=> {
-        res.redirect('/')
-      })
-      .catch(err => {
-        console.log('ERROR', err)
-      })
-    })
-  })
+//  router.post('/', upload.single('myFile'), (req, res) => {
+//     cloudinary.uploader.upload(req.file.path, (result) => {
+//       db.student.update({
+//         url: req.file.url
+//       }, {
+//         where: { id: req.body.id }
+//       })
+//       .then(()=> {
+//         res.redirect('/profile')
+//       })
+//       .catch(err => {
+//         console.log('ERROR', err)
+//       })
+//     })
+//   })
   
-  router.get('/profile', (req, res) =>{
-    db.cloudpic.findAll()
-    .then(myPics => {
-      res.render('profile', { myPics })
-    })
-    .catch(err =>{
-      console.log('ERROR', err)
-    })
-  })
+//   router.get('/profile', (req, res) =>{
+//     db.user.findByPk(req.user.id)
+//     .then(user => {
+//       if (user.distinction == 'student'){
+//         db.student.findOne({
+//           where: { userId: user.id }
+//         })
+//         .then(student => {
+//           res.render('profile', { user: student })
+//         })
+//         .catch(err =>{
+//         console.log('ERROR', err)
+//         })
+//       } else {
+//         db.tutor.findOne({
+//           where: { userId: user.id }
+//         })
+//         .then(tutor => {
+//           res.render('profile', { user: tutor })
+//         })
+//         .catch(err =>{
+//         console.log('ERROR', err)
+//         })
+//       }
+//     })
+//   }) 
+
+  
 
 
 module.exports = router
